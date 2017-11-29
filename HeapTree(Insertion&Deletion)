@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+int a[10],n=0;
+void create();
+void del();
+void display();
+int main()
+{
+	int rnge,i;
+	cout<<"Enter Range:";
+	cin>>rnge;
+	for(i=0;i<rnge;i++)
+	{
+		create();
+	}
+	display();
+	del();
+	cout<<endl;
+	display();
+}
+void create()
+{
+	int ptr,pptr,temp;
+	n=n+1;
+	cin>>a[n];
+	ptr=n;
+	pptr=ptr/2;
+	while(pptr>=1 && a[ptr]>a[pptr])
+	{
+		temp=a[ptr];
+		a[ptr]=a[pptr];
+		a[pptr]=temp;
+		ptr=pptr;
+		pptr=pptr/2;
+	}
+}
+void display()
+{
+	for(int i=1;i<=n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+}
+void del()
+{
+	int temp,ptr,par;
+	a[1]=a[n];
+	n=n-1;
+	ptr=1;
+	bool flag=false;
+	while(flag==false)
+	{
+		par=ptr;
+		if(2*par<=n && a[2*par]>a[par])
+		{
+			ptr=2*par;
+		}
+		if((2*par+1)>n && a[2*par+1]>a[2*ptr])
+		{
+			ptr=2*par+1;
+		}
+		if(par==ptr)
+		{
+			flag=true;
+		}
+		else
+		{
+			temp=a[ptr];
+			a[ptr]=a[par];
+			a[par]=temp;
+		}
+	}
+}
